@@ -1,15 +1,11 @@
 <script setup>
-const input = ref('empty');
-
-function submit(){
-  alert(input.value);
-}
+const todoStore = useTodoStore();
 </script>
 
 <template>
   <div>
-    <input type="text" v-model="input">
-    <p>{{ input }}</p>
-    <button @click="submit">submit</button>
+    <input type="text" v-model="todoStore.input">
+    <p>{{ todoStore.input }}</p>
+    <button @click="todoStore.submit">submit</button>
   </div>
 </template>
