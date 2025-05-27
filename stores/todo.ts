@@ -1,10 +1,19 @@
-export const useTodoStore = defineStore('todo', ()=>{
-    const input = ref('empty');
-    function submit(){
-        alert(input.value);
+export const useTodoStore = defineStore('todo', () => {
+    type TodoItem = {
+        id: string,
+        name: string
     }
-    return{
-        input,
-        submit
+
+    const todoList = ref<TodoItem[]>([]);
+
+    function addItem(name: string) {
+        const uuid = self.crypto.randomUUID().toString();
+        const item: TodoItem = {id: uuid, name: name};
+        todoList.value.push(item);
+    }
+
+    return {
+        todoList,
+        addItem
     }
 });
