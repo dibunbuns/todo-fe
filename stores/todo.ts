@@ -17,11 +17,12 @@ export const useTodoStore = defineStore("todo", () => {
     // grabs everything in array that doesn't match id, then reassigns those items to the todolist
   }
 
-  function editItem(id: string, edit: string) {
+  function editItem(id: string, newName: string) {
     let todoItem = todoList.value.find((item) => item.id === id)
+    if(todoItem){
+      todoItem.name = newName;
+    }
     console.log(todoItem)
-    let newItem = "hi";
-    // goal: in place editing
   }
 
   return {
