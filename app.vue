@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const todoStore = useTodoStore();
 const input = ref("laundry....");
+const editItem = ref<TodoItem | undefined>();
 </script>
 
 <template>
@@ -12,11 +13,15 @@ const input = ref("laundry....");
       <p v-for="item in todoStore.todoList" :key="item.id">
         {{ item.name }}
         <button @click="todoStore.deleteItem(item.id)">delete</button>
-        <button>edit</button>
+        <button @click="editItem = item">edit</button>
       </p>
     </div>
     <div class="editForm">
-      <EditForm />
+      <EditForm
+        v-if="editItem"
+        :todoItem="editItem"
+        @close="editItem = undefined"
+      />
     </div>
   </div>
 </template>

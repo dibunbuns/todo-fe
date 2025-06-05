@@ -22,6 +22,7 @@ export const useTodoStore = defineStore("todo", () => {
     if (todoItem) {
       todoItem.name = item.name;
     }
+    console.log(todoItem)
   }
 
   return {
