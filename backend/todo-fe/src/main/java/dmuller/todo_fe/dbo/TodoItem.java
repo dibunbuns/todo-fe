@@ -1,21 +1,23 @@
 package dmuller.todo_fe.dbo;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 @Entity
 public class TodoItem {
-    private int id;
+    @Id
+    private long id;
     private Long date_added;
     private String name;
     private String description;
     private Long date_completed;
     private Boolean completed;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -1,17 +1,23 @@
 package dmuller.todo_fe.service;
 
+import dmuller.todo_fe.dbo.TodoItem;
+import dmuller.todo_fe.repository.TodoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import dmuller.todo_fe.repository.TodoItem;
+import java.util.List;
 
 @Service
 public class TodoService {
-    private TodoItem reposItem;
+    private final TodoRepository todoRepository;
 
-    public TodoService(TodoItem item) {
-        this.reposItem = reposItem;
+    @Autowired
+    public TodoService(TodoRepository todoRepository) {
+        this.todoRepository = todoRepository;
     }
 
-    public 
+    public List<TodoItem> getAllItems() {
+        return todoRepository.findAll();
+    }
     
 }
