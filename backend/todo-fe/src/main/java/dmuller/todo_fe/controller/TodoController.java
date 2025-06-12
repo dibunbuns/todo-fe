@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/todo-app")
+@RequestMapping("/todo")
 public class TodoController {
 
     private final TodoService service;

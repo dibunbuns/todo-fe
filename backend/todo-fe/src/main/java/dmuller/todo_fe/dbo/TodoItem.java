@@ -1,16 +1,24 @@
 package dmuller.todo_fe.dbo;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "todo")
 public class TodoItem {
     @Id
     private long id;
-    private Long date_added;
+    @Column(name = "date_added")
+    private LocalDateTime dateAdded;
     private String name;
     private String description;
-    private Long date_completed;
+    @Column(name = "date_completed")
+    private LocalDate dateCompleted;
     private Boolean completed;
 
     public long getId() {
@@ -21,12 +29,12 @@ public class TodoItem {
         this.id = id;
     }
 
-    public Long getDate_added() {
-        return date_added;
+    public LocalDateTime getDateAdded() {
+        return dateAdded;
     }
 
-    public void setDate_added(Long date_added) {
-        this.date_added = date_added;
+    public void setDateAdded(LocalDateTime dateAdded) {
+        this.dateAdded = dateAdded;
     }
 
     public String getName() {
@@ -45,12 +53,12 @@ public class TodoItem {
         this.description = description;
     }
 
-    public Long getDate_completed() {
-        return date_completed;
+    public LocalDate getDateCompleted() {
+        return dateCompleted;
     }
 
-    public void setDate_completed(Long date_completed) {
-        this.date_completed = date_completed;
+    public void setDate_completed(LocalDate dateCompleted) {
+        this.dateCompleted = dateCompleted;
     }
 
     public Boolean getCompleted() {
