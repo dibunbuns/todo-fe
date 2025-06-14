@@ -1,9 +1,14 @@
 package dmuller.todo_fe.repository;
 
 import dmuller.todo_fe.dbo.TodoItem;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
-public interface TodoRepository extends JpaRepository<TodoItem, Long> {
+import java.util.List;
+
+public interface TodoRepository {
+    int addTodoItem(TodoItem todoItem);
+    List<TodoItem> getAllTodoItems();
+    TodoItem getTodoItem(long id);
+    int updateTodoItem(TodoItem todoItem);
+    int removeTodoItem(long id);
+    int completeTodoItem(long id);
 }
