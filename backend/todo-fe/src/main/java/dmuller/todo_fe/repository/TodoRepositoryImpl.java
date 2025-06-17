@@ -15,7 +15,7 @@ public class TodoRepositoryImpl implements TodoRepository {
 
     @Override
     public int addTodoItem(TodoItem todoItem) {
-        String  insertItemSql = "INSERT INTO todo (name, description) VALUES (?, ?)";
+        String insertItemSql = "INSERT INTO todo (name, description) VALUES (?, ?)";
         return jdbcTemplate.update(insertItemSql, todoItem.getName(), todoItem.getDescription());
     }
 
@@ -46,6 +46,7 @@ public class TodoRepositoryImpl implements TodoRepository {
     @Override
     public int completeTodoItem(long id) {
         String completeItem = "UPDATE todo SET completed = ? WHERE id = ?";
-        return jdbcTemplate.update(completeItem, id);
+        return jdbcTemplate.update(completeItem, true, id);
     }
+
 }

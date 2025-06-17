@@ -15,33 +15,36 @@ public class TodoController {
     @Autowired
     TodoRepository todoRepository;
 
-    @PostMapping("/item")
+    @PostMapping("/items")
     public int addItem(@RequestBody TodoItem item) {
         return todoRepository.addTodoItem(item);
     }
 
     @GetMapping("/items")
     public List<TodoItem> getItems() {
+        System.out.println("HIT ALL ITEMS");
         return todoRepository.getAllTodoItems();
     }
 
-    @GetMapping("/item/{id}")
-    public TodoItem getItem(@PathVariable("id") int id) {
+    @GetMapping("/items/{id}")
+    public TodoItem getItem(@PathVariable("id") long id) {
+        System.out.println("HIT ITEM ID: " + id);
         return todoRepository.getTodoItem(id);
     }
 
-    @PutMapping("/item")
+    @PutMapping("/items")
     public int updateItem(@RequestBody TodoItem item) {
         return todoRepository.updateTodoItem(item);
     }
 
-    @DeleteMapping("/item/{id}")
-    public int deleteItem(@PathVariable("id") int id) {
+    @DeleteMapping("/items/{id}")
+    public int deleteItem(@PathVariable("id") long id) {
         return todoRepository.removeTodoItem(id);
     }
 
-    @PutMapping("/item/{id}")
-    public int completeItem(@PathVariable("id") int id) {
+    @PutMapping("/items/{id}")
+    public int completeItem(@PathVariable("id") long id) {
         return todoRepository.completeTodoItem(id);
     }
+
 }
