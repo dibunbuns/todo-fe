@@ -5,6 +5,18 @@ export type TodoItem = {
 
 export const useTodoStore = defineStore("todo", () => {
   const todoList = ref<TodoItem[]>([]);
+  const config = useRuntimeConfig();
+
+  async function showItems(){
+    const res = await fetch(`${config.public.apiBase}/items`)
+    if(!res.ok){
+      throw new Error(`Response status: ${res.status}`)
+    }
+    const data = await res.json();
+    console.log(data)
+    todoList.value = data;
+  }
+
 
   function addItem(name: string) {
     const uuid = self.crypto.randomUUID();
@@ -30,5 +42,6 @@ export const useTodoStore = defineStore("todo", () => {
     addItem,
     deleteItem,
     editItem,
+    showItems,
   };
 });

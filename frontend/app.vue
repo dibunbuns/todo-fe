@@ -2,6 +2,10 @@
 const todoStore = useTodoStore();
 const input = ref("laundry....");
 const editItem = ref<TodoItem | undefined>();
+onMounted(() => {
+  todoStore.showItems();
+  console.log("on mounted")
+});
 </script>
 
 <template>
