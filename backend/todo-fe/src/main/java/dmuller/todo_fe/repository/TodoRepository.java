@@ -5,7 +5,7 @@ import dmuller.todo_fe.dbo.TodoItem;
 import java.util.List;
 
 public interface TodoRepository {
-    int addTodoItem(TodoItem todoItem);
+    int addTodoItem(String item);
     List<TodoItem> getAllTodoItems();
     TodoItem getTodoItem(long id);
     int updateTodoItem(TodoItem todoItem);

@@ -14,9 +14,9 @@ public class TodoRepositoryImpl implements TodoRepository {
     JdbcTemplate jdbcTemplate;
 
     @Override
-    public int addTodoItem(TodoItem todoItem) {
-        String insertItemSql = "INSERT INTO todo (name, description) VALUES (?, ?)";
-        return jdbcTemplate.update(insertItemSql, todoItem.getName(), todoItem.getDescription());
+    public int addTodoItem(String name) {
+        String insertItemSql = "INSERT INTO todo (name) VALUES (?)";
+        return jdbcTemplate.update(insertItemSql, name);
     }
 
     @Override

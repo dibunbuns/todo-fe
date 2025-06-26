@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const todoStore = useTodoStore();
-const input = ref("laundry....");
+const input = ref("dinner")
 const editItem = ref<TodoItem | undefined>();
 onMounted(() => {
   todoStore.showItems();

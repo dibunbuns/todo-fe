@@ -16,13 +16,12 @@ public class TodoController {
     TodoRepository todoRepository;
 
     @PostMapping("/items")
-    public int addItem(@RequestBody TodoItem item) {
+    public int addItem(@RequestBody String item) {
         return todoRepository.addTodoItem(item);
     }
 
     @GetMapping("/items")
     public List<TodoItem> getItems() {
-        System.out.println("HIT ALL ITEMS");
         return todoRepository.getAllTodoItems();
     }
 
