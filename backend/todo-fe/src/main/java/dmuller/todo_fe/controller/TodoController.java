@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
+
 @RestController
 @RequestMapping("/todo")
 public class TodoController {
@@ -16,8 +17,9 @@ public class TodoController {
     TodoRepository todoRepository;
 
     @PostMapping("/items")
-    public int addItem(@RequestBody String item) {
-        return todoRepository.addTodoItem(item);
+    public int addItem(@RequestBody TodoItem item) {
+        String name = item.getName();
+        return todoRepository.addTodoItem(name);
     }
 
     @GetMapping("/items")
@@ -26,8 +28,7 @@ public class TodoController {
     }
 
     @GetMapping("/items/{id}")
-    public TodoItem getItem(@PathVariable("id") long id) {
-        System.out.println("HIT ITEM ID: " + id);
+    public TodoItem getItem(@PathVariable long id) {
         return todoRepository.getTodoItem(id);
     }
 
@@ -37,13 +38,13 @@ public class TodoController {
     }
 
     @DeleteMapping("/items/{id}")
-    public int deleteItem(@PathVariable("id") long id) {
+    public int deleteItem(@PathVariable Long id) {
         return todoRepository.removeTodoItem(id);
     }
 
     @PutMapping("/items/{id}")
-    public int completeItem(@PathVariable("id") long id) {
-        return todoRepository.completeTodoItem(id);
+    public int completeItem(@PathVariable long id, @RequestBody boolean status) {
+        return todoRepository.completeTodoItem(id, status);
     }
 
 }

@@ -1,6 +1,7 @@
 export type TodoItem = {
   id: number;
   name: string;
+  completed: boolean;
 };
 
 export const useTodoStore = defineStore("todo", () => {
@@ -16,38 +17,61 @@ export const useTodoStore = defineStore("todo", () => {
     todoList.value = data;
   }
 
-  async function addItem(item: String) {
-    console.log("hellow add item");
-    console.log(item)
+  async function addItem(name: String) {
     const res = await fetch(`${config.public.apiBase}/items`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(item),
+      body: JSON.stringify({ name: name }),
     });
-    console.log(item)
     if (!res.ok) {
       throw new Error(`Response status: ${res.status}`);
     }
-    return res;
-
-    // const uuid = self.crypto.randomUUID();
-    // const item: TodoItem = { id: uuid, name: name };
-    // todoList.value.push(item);
+    await showItems();
   }
 
-  function deleteItem(id: number) {
-   
-    // grabs everything in array that doesn't match id, then reassigns those items to the todoList
-  }
-
-  function editItem(item: TodoItem) {
-    const todoItem = todoList.value.find((i) => i.id === item.id);
-    if (todoItem) {
-      todoItem.name = item.name;
+  async function deleteItem(id: number) {
+    const res = await fetch(`${config.public.apiBase}/items/${id}`, {
+      method: "DELETE",
+    });
+    if (!res.ok) {
+      throw new Error(`Response status: ${res.status}`);
     }
-    console.log(todoItem);
+    await showItems();
+  }
+
+  async function editItem(item: TodoItem) {
+    const res = await fetch(`${config.public.apiBase}/items`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(item),
+    });
+    console.log(item);
+    await showItems();
+  }
+
+  async function completeItem(id: number, completed: boolean) {
+    const res = await fetch(`${config.public.apiBase}/items/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(completed),
+    });
+    if (!res.ok) {
+      throw new Error(`Response status: ${res.status}`);
+    }
+    await showItems();
+  }
+
+  function toggleComplete(id: number) {
+    const item = todoList.value.find((i) => i.id === id);
+    if (item) {
+      item.completed = !item.completed;
+    }
   }
 
   return {
@@ -56,5 +80,7 @@ export const useTodoStore = defineStore("todo", () => {
     deleteItem,
     editItem,
     showItems,
+    completeItem,
+    toggleComplete,
   };
 });

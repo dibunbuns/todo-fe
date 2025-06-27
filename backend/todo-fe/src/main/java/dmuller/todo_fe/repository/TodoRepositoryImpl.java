@@ -21,7 +21,7 @@ public class TodoRepositoryImpl implements TodoRepository {
 
     @Override
     public List<TodoItem> getAllTodoItems() {
-        String getAllTodoItemsSql = "SELECT * FROM todo";
+        String getAllTodoItemsSql = "SELECT * FROM todo ORDER BY date_added";
         return jdbcTemplate.query(getAllTodoItemsSql, new BeanPropertyRowMapper<>(TodoItem.class));
     }
 
@@ -33,20 +33,19 @@ public class TodoRepositoryImpl implements TodoRepository {
 
     @Override
     public int updateTodoItem(TodoItem todoItem) {
-        String updateItemSql = "UPDATE todo SET name = ?, description = ? WHERE id = ?";
-        return jdbcTemplate.update(updateItemSql, todoItem.getName(), todoItem.getDescription(), todoItem.getId());
+        String updateItemSql = "UPDATE todo SET name = ? WHERE id = ?";
+        return jdbcTemplate.update(updateItemSql, todoItem.getName(), todoItem.getId());
     }
 
     @Override
-    public int removeTodoItem(long id) {
+    public int removeTodoItem(Long id) {
         String removeItemSql = "DELETE FROM todo WHERE id = ?";
         return jdbcTemplate.update(removeItemSql, id);
     }
 
     @Override
-    public int completeTodoItem(long id) {
+    public int completeTodoItem(long id, boolean status) {
         String completeItem = "UPDATE todo SET completed = ? WHERE id = ?";
-        return jdbcTemplate.update(completeItem, true, id);
+        return jdbcTemplate.update(completeItem, status, id);
     }
-
 }

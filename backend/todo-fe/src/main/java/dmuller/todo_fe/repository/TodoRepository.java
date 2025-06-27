@@ -5,10 +5,10 @@ import dmuller.todo_fe.dbo.TodoItem;
 import java.util.List;
 
 public interface TodoRepository {
-    int addTodoItem(String item);
+    int addTodoItem(String name);
     List<TodoItem> getAllTodoItems();
     TodoItem getTodoItem(long id);
     int updateTodoItem(TodoItem todoItem);
-    int removeTodoItem(long id);
-    int completeTodoItem(long id);
+    int removeTodoItem(Long id);
+    int completeTodoItem(long id, boolean status);
 }
