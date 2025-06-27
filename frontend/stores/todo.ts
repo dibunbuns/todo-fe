@@ -49,6 +49,9 @@ export const useTodoStore = defineStore("todo", () => {
       },
       body: JSON.stringify(item),
     });
+    if (!res.ok) {
+      throw new Error(`Response status: ${res.status}`);
+    }
     await showItems();
   }
 
