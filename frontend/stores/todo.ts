@@ -49,7 +49,6 @@ export const useTodoStore = defineStore("todo", () => {
       },
       body: JSON.stringify(item),
     });
-    console.log(item);
     await showItems();
   }
 
