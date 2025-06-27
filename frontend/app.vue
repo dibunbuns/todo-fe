@@ -10,7 +10,7 @@ onMounted(() => {
 <template>
   <div class="app">
     <div class="list">
-      <input type="text" v-model="input" />
+      <input type="text" v-model="input" @keypress.enter="todoStore.addItem(input)"/>
       <button @click="todoStore.addItem(input)">submit</button>
 
       <p
