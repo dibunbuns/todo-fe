@@ -1,0 +1,29 @@
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NUXT_PUBLIC_API_BASE=http://localhost:9090/todo
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend/todo-fe
+    ports:
+      - "9090:9090"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/todo
+      - SPRING_DATASOURCE_USERNAME=dmuller
+      - SPRING_DATASOURCE_PASSWORD=password
+    depends_on:
+      - postgres
+
+  postgres:
+    image: "postgres:17.5"
+    environment:
+      - POSTGRES_USER=dmuller
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=todo
+    ports:
+      - "5432:5432"

@@ -1,0 +1,19 @@
+
+CREATE TABLE todo(  
+    id int NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    date_added TIMESTAMP DEFAULT NOW(),
+    name VARCHAR(255),
+    description VARCHAR,
+    date_completed DATE,
+    completed BOOLEAN
+);
+
+INSERT INTO todo (name, description) 
+VALUES 
+('laundry', 'bed sheets, clothes'), 
+('grocery shopping', 'list'), 
+('workout', 'upper body');
+
+SELECT * FROM todo;
+
+DROP TABLE todo;
